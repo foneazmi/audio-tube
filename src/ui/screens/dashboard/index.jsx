@@ -5,7 +5,7 @@ export const DashboardScreen = () => {
   const dispatch = useDispatch();
   const { youtube } = useSelector(({ global }) => global);
   return (
-    <div className="h-full">
+    <div className="flex flex-col h-screen">
       <Navbar
         onSearch={(e) => {
           console.log("trigger");
