@@ -6,6 +6,7 @@ import {
 import { useDispatch } from "react-redux";
 import { setTheme } from "../../../stores/actions";
 import { THEME } from "../../../helpers";
+import { useState } from "react";
 
 export const ThemeItem = ({ theme }) => {
   const dispatch = useDispatch();
@@ -36,31 +37,52 @@ export const ThemeItem = ({ theme }) => {
   );
 };
 
-export const Navbar = () => (
-  <div className="sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-all duration-100 text-primary-content">
-    <nav className="navbar w-full">
-      <div className="flex flex-1">
-        <div className="font-black text-primary inline-flex text-lg ml-4">
-          <span className="text-primary">Audio</span>
-          <span className="text-base-content">Tube</span>
-        </div>
-      </div>
-      <div className="flex-0">
-        <div title="Change Theme" className="dropdown dropdown-end ">
-          <div tabIndex="0" className="btn gap-1 normal-case btn-ghost">
-            <SparklesIcon className="inline-block h-5 w-5 text-base-content stroke-current md:h-6 md:w-6" />
-            <span className="hidden md:inline text-base-content">Theme</span>
-            <ChevronDownIcon className="ml-1 hidden h-3 w-3 fill-current opacity-60 sm:inline-block" />
+export const Navbar = (props) => {
+  const [query, setQuery] = useState("");
+  return (
+    <div className="sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-all duration-100 text-primary-content">
+      <nav className="navbar w-full">
+        <div className="flex-1">
+          <div className="font-black text-primary inline-flex text-lg ml-4">
+            <span className="text-primary">Audio</span>
+            <span className="text-base-content">Tube</span>
           </div>
-          <div className="dropdown-content bg-base-200 text-base-content rounded-t-box rounded-b-box top-px max-h-96 h-[70vh] w-52 overflow-y-auto shadow-2xl mt-16">
-            <div className="grid grid-cols-1 gap-3 p-3" tabIndex="0">
-              {THEME.map((element, index) => (
-                <ThemeItem theme={element} key={`${index}-theme`} />
-              ))}
+        </div>
+        <div className="flex-1">
+          <input
+            type="text"
+            placeholder="Search...."
+            className="input input-bordered input-primary w-full max-w-xs"
+            onBlur={() => {
+              props.onSearch(query);
+            }}
+            onChange={(event) => {
+              setQuery(event.target.value);
+            }}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" && query.length > 0) {
+                props.onSearch(query);
+              }
+            }}
+          />
+        </div>
+        <div className="flex-0">
+          <div title="Change Theme" className="dropdown dropdown-end ">
+            <div tabIndex="0" className="btn gap-1 normal-case btn-ghost">
+              <SparklesIcon className="inline-block h-5 w-5 text-base-content stroke-current md:h-6 md:w-6" />
+              <span className="hidden md:inline text-base-content">Theme</span>
+              <ChevronDownIcon className="ml-1 hidden h-3 w-3 fill-current opacity-60 sm:inline-block" />
+            </div>
+            <div className="dropdown-content bg-base-200 text-base-content rounded-t-box rounded-b-box top-px max-h-96 h-[70vh] w-52 overflow-y-auto shadow-2xl mt-16">
+              <div className="grid grid-cols-1 gap-3 p-3" tabIndex="0">
+                {THEME.map((element, index) => (
+                  <ThemeItem theme={element} key={`${index}-theme`} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </nav>
-  </div>
-);
+      </nav>
+    </div>
+  );
+};

@@ -7,6 +7,9 @@ module.exports = {
         handWriting: ["Bad Script"],
         poppins: ["Poppins"],
       },
+      animation: {
+        "spin-slow": "spin 5s linear infinite",
+      },
     },
   },
   plugins: [require("daisyui")],

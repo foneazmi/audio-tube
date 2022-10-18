@@ -2,6 +2,7 @@ import { DashboardScreen } from "./ui/screens";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import { useSelector } from "react-redux";
+import { PlayerComponent } from "./ui/components";
 
 const AppRouter = () => {
   return (
@@ -19,6 +20,7 @@ export const RouteApp = () => {
       <Router>
         <AppRouter />
       </Router>
+      <PlayerComponent />
     </div>
   );
 };

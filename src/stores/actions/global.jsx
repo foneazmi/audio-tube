@@ -11,12 +11,3 @@ export const loadingEnd = () => (dispatch) => {
 export const setTheme = (theme) => (dispatch) => {
   dispatch({ type: THEME, payload: theme });
 };
-
-export const setTimer =
-  (timer = 10000) =>
-  (dispatch) => {
-    dispatch({ type: BEGIN });
-    setTimeout(() => {
-      dispatch({ type: END });
-    }, timer);
-  };
