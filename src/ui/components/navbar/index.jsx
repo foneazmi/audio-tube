@@ -53,6 +53,7 @@ export const Navbar = (props) => {
             type="text"
             placeholder="Search...."
             className="input input-bordered w-full max-w-xs"
+            value={query}
             onBlur={() => {
               if (query.length > 0) {
                 props.onSearch(query);

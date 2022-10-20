@@ -72,6 +72,7 @@ export const PlayerComponent = () => {
           <input
             type="text"
             placeholder="Input Id"
+            value={query}
             className="input input-bordered w-full max-w-xs"
             onBlur={() => {
               if (query.length > 0) {
