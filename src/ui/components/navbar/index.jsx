@@ -40,7 +40,7 @@ export const ThemeItem = ({ theme }) => {
 export const Navbar = (props) => {
   const [query, setQuery] = useState("");
   return (
-    <div className="sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-all duration-100 text-primary-content">
+    <div className="sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-all duration-100">
       <nav className="navbar w-full">
         <div className="flex-1">
           <div className="font-black text-primary inline-flex text-lg ml-4">
@@ -56,6 +56,7 @@ export const Navbar = (props) => {
             onBlur={() => {
               if (query.length > 0) {
                 props.onSearch(query);
+                setQuery("");
               }
             }}
             onChange={(event) => {
@@ -64,6 +65,7 @@ export const Navbar = (props) => {
             onKeyDown={(event) => {
               if (event.key === "Enter" && query.length > 0) {
                 props.onSearch(query);
+                setQuery("");
               }
             }}
           />

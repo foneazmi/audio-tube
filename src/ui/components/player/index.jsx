@@ -24,11 +24,11 @@ export const PlayerComponent = () => {
           } hover:animate-none object-fill rounded-full`}
         />
         <YouTube
-          className="hidden"
+          // className="hidden"
           videoId={selectedMusic}
           opts={{
-            // height: "512",
-            // width: "800",
+            height: "0",
+            width: "0",
             playerVars: {
               controls: 0,
               disablekb: 0,
@@ -76,6 +76,7 @@ export const PlayerComponent = () => {
             onBlur={() => {
               if (query.length > 0) {
                 dispatch(setSelectedMusic(query));
+                setQuery("");
               }
             }}
             onChange={(event) => {
@@ -84,6 +85,7 @@ export const PlayerComponent = () => {
             onKeyDown={(event) => {
               if (event.key === "Enter" && query.length > 0) {
                 dispatch(setSelectedMusic(query));
+                setQuery("");
               }
             }}
           />
