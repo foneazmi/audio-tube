@@ -52,9 +52,11 @@ export const Navbar = (props) => {
           <input
             type="text"
             placeholder="Search...."
-            className="input input-bordered input-primary w-full max-w-xs"
+            className="input input-bordered w-full max-w-xs"
             onBlur={() => {
-              props.onSearch(query);
+              if (query.length > 0) {
+                props.onSearch(query);
+              }
             }}
             onChange={(event) => {
               setQuery(event.target.value);

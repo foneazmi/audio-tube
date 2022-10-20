@@ -9,7 +9,7 @@ import {
 
 const INITIAL_STATE = {
   loading: false,
-  theme: "cyberpunk",
+  theme: "halloween",
   youtube: [],
   selectedMusic: "jfKfPfyJRdk",
 };

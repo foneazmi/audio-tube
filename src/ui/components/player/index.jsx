@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
 import YouTube from "react-youtube";
 import { PlayIcon, StopIcon, PauseIcon } from "@heroicons/react/24/solid";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedMusic } from "../../../stores/actions";
 export const PlayerComponent = () => {
   const [isPlayed, setIsPlayed] = useState(false);
   const [eventState, setEventState] = useState();
-  // const [videoId, setVideoId] = useState("jfKfPfyJRdk");
+  const [query, setQuery] = useState();
   const { selectedMusic } = useSelector(({ global }) => global);
+  const dispatch = useDispatch();
   useEffect(() => {
     setIsPlayed(false);
   }, [selectedMusic]);
 
   return (
-    <div className="btm-nav z-50">
+    <div className="btm-nav z-50 bg-base-300">
       <div className="flex px-8 flex-row justify-start">
         <img
           src={`https://img.youtube.com/vi/${selectedMusic}/0.jpg`}
@@ -25,8 +27,8 @@ export const PlayerComponent = () => {
           className="hidden"
           videoId={selectedMusic}
           opts={{
-            height: "512",
-            width: "800",
+            // height: "512",
+            // width: "800",
             playerVars: {
               controls: 0,
               disablekb: 0,
@@ -65,6 +67,27 @@ export const PlayerComponent = () => {
         >
           <StopIcon className="h-6 w-6 ml-2 text-base-content" />
         </button>
+        <div className="flex-1" />
+        <div>
+          <input
+            type="text"
+            placeholder="Input Id"
+            className="input input-bordered w-full max-w-xs"
+            onBlur={() => {
+              if (query.length > 0) {
+                dispatch(setSelectedMusic(query));
+              }
+            }}
+            onChange={(event) => {
+              setQuery(event.target.value);
+            }}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" && query.length > 0) {
+                dispatch(setSelectedMusic(query));
+              }
+            }}
+          />
+        </div>
       </div>
     </div>
   );
